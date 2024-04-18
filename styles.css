@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root{
+    --modal:#141E46;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Roboto',sans-serif;
+}
+.modal{
+    background-color: var(--modal);
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items:center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    gap: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    gap:10px
+}
+
+.close-modal{
+    color: white;
+    padding:10px 20px;
+    margin-bottom: 10px;
+    background-color: #0d6efd;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+.lose-conditions,.win-conditions,.game-rules{
+    margin-bottom: 10px;
+}
+
+li{
+    margin: 10px;
+}
+
+/* CSS for the Main LayOut */

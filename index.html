@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js"></script>
+    <title>Memory Game</title>
+  </head>
+  <body>
+    <!-- Modal -->
+    <div class="modal">
+      <h1>Welcome!</h1>
+      <div class="description">
+        <div class="game-rules">
+          <h2>Game Rules</h2>
+          <ol>
+            <li>You will flip two cards face-up.</li>
+            <li>If the cards are a pair, then they are removed.</li>
+            <li>If not, then they are flipped back down.</li>
+            <li>
+              You will have 5 mins to clear the board and 5 wrong attempts.
+            </li>
+          </ol>
+        </div>
+        <div class="win-conditions">
+          <h2>Win Conditions</h2>
+          <ol>
+            <li>
+              You matched all cards and clear the board within the time limit
+            </li>
+          </ol>
+        </div>
+        <div class="lose-conditions">
+          <h2>Lose Conditions</h2>
+          <ol>
+            <li>You failed to match the cards 5 times</li>
+            <li>You failed to clear the board within 5 mins</li>
+          </ol>
+        </div>
+      </div>
+      <button class="close-modal">Close</button>
+    </div>
+  </body>
+</html>
