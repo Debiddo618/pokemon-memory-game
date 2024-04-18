@@ -7,9 +7,11 @@
     margin: 0;
     padding: 0;
 }
+
 body{
     font-family: 'Roboto',sans-serif;
 }
+
 .modal{
     background-color: var(--modal);
     display: flex;
@@ -33,7 +35,7 @@ body{
     gap:10px
 }
 
-.close-modal{
+.button{
     color: white;
     padding:10px 20px;
     margin-bottom: 10px;
