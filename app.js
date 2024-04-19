@@ -41,7 +41,7 @@ function initializeContainer() {
       cardContainer.appendChild(card);
     }
   }
-  timerCountDown(20);
+  timerCountDown(300);
 }
 
 // handle click
@@ -129,7 +129,7 @@ function timerCountDown(gameTime) {
   function tick() {
     let time = document.getElementById("time");
     seconds--;
-    time.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+    time.innerHTML = secondsToMinutesAndSeconds(seconds);
     if (seconds > 0) {
       if (!winner && !loser && !timePaused) {
         setTimeout(tick, 1000);
@@ -148,12 +148,20 @@ function timerCountDown(gameTime) {
 function pauseGame() {
   if (!timePaused) {
     timePaused = true;
+    pauseBtn.innerHTML = "Resume Game";
     console.log("Game is paused!");
   } else {
     timePaused = false;
     console.log("Game is running");
     timerCountDown(seconds);
   }
+}
+
+// seconds to minutes converter
+function secondsToMinutesAndSeconds(seconds) {
+  let minutes = Math.floor(seconds / 60);
+  let remainderSeconds = seconds % 60;
+  return minutes + ":" + remainderSeconds;
 }
 
 // event listeners
