@@ -1,6 +1,7 @@
 const cardContainer = document.querySelector(".card-container");
 const openModalBtn = document.querySelector(".rule-button");
 const closeModalBtn = document.querySelector(".close-modal");
+const restartBtn = document.querySelector(".restart-button");
 const modal = document.querySelector(".modal");
 
 // display variables
@@ -27,6 +28,7 @@ const testArr = [
 
 // initializing the card container
 function initializeContainer() {
+  cardContainer.innerHTML = "";
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       const card = document.createElement("div");
@@ -106,8 +108,20 @@ function updateMessage() {
   messageEl.innerText = message;
 }
 
+// restart game
+function restartGame() {
+  cardContainer.innerHTML = "";
+  firstSelect = secondSelect = null;
+  correct = wrong = 0;
+  winner = loser = false;
+  message = "Pick two cards";
+  initializeContainer();
+  updateMessage();
+}
+
 // event listeners
 openModalBtn.addEventListener("click", () => (modal.style.display = "flex"));
 closeModalBtn.addEventListener("click", () => (modal.style.display = "none"));
+restartBtn.addEventListener("click", restartGame);
 
 initializeContainer();
