@@ -2,6 +2,7 @@ const cardContainer = document.querySelector(".card-container");
 const openModalBtn = document.querySelector(".rule-button");
 const closeModalBtn = document.querySelector(".close-modal");
 const restartBtn = document.querySelector(".restart-button");
+const pauseBtn = document.querySelector(".pause-button");
 const modal = document.querySelector(".modal");
 
 // display variables
@@ -13,7 +14,9 @@ const messageEl = document.getElementById("message");
 // let selectedCards = [];
 let correct = 0;
 let wrong = 0;
-let time = 5;
+let timeUp = false;
+let timePaused = false;
+let seconds = 0;
 let winner = false;
 let loser = false;
 let firstSelect = null;
@@ -28,7 +31,6 @@ const testArr = [
 
 // initializing the card container
 function initializeContainer() {
-  cardContainer.innerHTML = "";
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       const card = document.createElement("div");
@@ -39,6 +41,7 @@ function initializeContainer() {
       cardContainer.appendChild(card);
     }
   }
+  timerCountDown(20);
 }
 
 // handle click
@@ -51,10 +54,11 @@ const handleClick = (event) => {
 
 // 1. push the card into the select card array
 function selectCards(event) {
-  if (!winner && !loser) {
+  if (!winner && !loser && !timePaused) {
     if (
       (firstSelect === null || secondSelect === null) &&
-      !event.target.classList.contains("selected")
+      !event.target.classList.contains("selected") &&
+      !event.target.classList.contains("removed")
     ) {
       if (firstSelect === null) {
         firstSelect = event.target;
@@ -70,7 +74,7 @@ function selectCards(event) {
 
 // 2. check if the cards, matches
 function checkCards(event) {
-  if (firstSelect !== null && secondSelect !== null) {
+  if (firstSelect !== null && secondSelect !== null && !timePaused) {
     if (firstSelect.id === secondSelect.id) {
       firstSelect.classList.remove("selected");
       firstSelect.classList.add("removed");
@@ -119,9 +123,43 @@ function restartGame() {
   updateMessage();
 }
 
+// timer count down
+function timerCountDown(gameTime) {
+  seconds = gameTime;
+  function tick() {
+    let time = document.getElementById("time");
+    seconds--;
+    time.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+    if (seconds > 0) {
+      if (!winner && !loser && !timePaused) {
+        setTimeout(tick, 1000);
+      }
+    } else {
+      message = "Time is up! You Loss!";
+      loser = true;
+      timeUp = true;
+      updateMessage();
+    }
+  }
+  tick();
+}
+
+// pauseGame
+function pauseGame() {
+  if (!timePaused) {
+    timePaused = true;
+    console.log("Game is paused!");
+  } else {
+    timePaused = false;
+    console.log("Game is running");
+    timerCountDown(seconds);
+  }
+}
+
 // event listeners
 openModalBtn.addEventListener("click", () => (modal.style.display = "flex"));
 closeModalBtn.addEventListener("click", () => (modal.style.display = "none"));
 restartBtn.addEventListener("click", restartGame);
+pauseBtn.addEventListener("click", pauseGame);
 
 initializeContainer();
