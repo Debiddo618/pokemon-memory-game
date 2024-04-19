@@ -171,8 +171,16 @@ function secondsToMinutesAndSeconds(seconds) {
 }
 
 // event listeners
-openModalBtn.addEventListener("click", () => (modal.style.display = "flex"));
-closeModalBtn.addEventListener("click", () => (modal.style.display = "none"));
+openModalBtn.addEventListener("click", () => {
+  modal.style.display = "flex";
+  if (!timePaused) {
+    pauseGame();
+  }
+});
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  pauseGame();
+});
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", pauseGame);
 
