@@ -167,7 +167,9 @@ function pauseGame() {
 function secondsToMinutesAndSeconds(seconds) {
   let minutes = Math.floor(seconds / 60);
   let remainderSeconds = seconds % 60;
-  return minutes + ":" + remainderSeconds;
+  return remainderSeconds < 10
+    ? minutes + ":0" + remainderSeconds
+    : minutes + ":" + remainderSeconds;
 }
 
 // event listeners
