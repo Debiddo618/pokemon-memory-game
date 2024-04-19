@@ -16,6 +16,8 @@ let correct = 0;
 let wrong = 0;
 let timeUp = false;
 let timePaused = false;
+let timeInterval;
+let restart = false;
 let seconds = 0;
 let winner = false;
 let loser = false;
@@ -119,6 +121,8 @@ function restartGame() {
   correct = wrong = 0;
   winner = loser = false;
   message = "Pick two cards";
+  timePaused = false;
+  pauseBtn.innerHTML = "Pause Game";
   initializeContainer();
   updateMessage();
 }
@@ -132,7 +136,8 @@ function timerCountDown(gameTime) {
     time.innerHTML = secondsToMinutesAndSeconds(seconds);
     if (seconds > 0) {
       if (!winner && !loser && !timePaused) {
-        setTimeout(tick, 1000);
+        clearInterval(timeInterval);
+        timeInterval = setTimeout(tick, 1000);
       }
     } else {
       message = "Time is up! You Loss!";
@@ -153,6 +158,7 @@ function pauseGame() {
   } else {
     timePaused = false;
     console.log("Game is running");
+    pauseBtn.innerHTML = "Pause Game";
     timerCountDown(seconds);
   }
 }
