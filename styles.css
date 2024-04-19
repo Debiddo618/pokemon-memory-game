@@ -29,6 +29,7 @@ body{
     gap: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
+    border-radius: 10px;
 }
 .description{
     display: flex;
@@ -79,10 +80,19 @@ li{
     width:calc(100%/4);
     aspect-ratio:1/1;
     border:2px solid black;
+    background-color: green;
 }
 
 .info-bar{
     display: flex;
     width: 50%;
-    justify-content: space-around;
+    justify-content: space-evenly;
+}
+
+.selected{
+    background-color: red;
+}
+
+.removed{
+    background-color: blue;
 }
