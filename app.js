@@ -129,24 +129,26 @@ function restartGame() {
 
 // timer count down
 function timerCountDown(gameTime) {
-  seconds = gameTime;
-  function tick() {
-    let time = document.getElementById("time");
-    seconds--;
-    time.innerHTML = secondsToMinutesAndSeconds(seconds);
-    if (seconds > 0) {
-      if (!winner && !loser && !timePaused) {
-        clearInterval(timeInterval);
-        timeInterval = setTimeout(tick, 1000);
+  if (!winner && !loser) {
+    seconds = gameTime;
+    function tick() {
+      let time = document.getElementById("time");
+      seconds--;
+      time.innerHTML = secondsToMinutesAndSeconds(seconds);
+      if (seconds > 0) {
+        if (!winner && !loser && !timePaused) {
+          clearInterval(timeInterval);
+          timeInterval = setTimeout(tick, 1000);
+        }
+      } else {
+        message = "Time is up! You Loss!";
+        loser = true;
+        timeUp = true;
+        updateMessage();
       }
-    } else {
-      message = "Time is up! You Loss!";
-      loser = true;
-      timeUp = true;
-      updateMessage();
     }
+    tick();
   }
-  tick();
 }
 
 // pauseGame
