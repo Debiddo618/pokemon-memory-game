@@ -6,6 +6,16 @@ const pauseBtn = document.querySelector(".pause-button");
 const modal = document.querySelector(".modal");
 const modalContainer = document.querySelector(".modal-container");
 
+const closeResultBtn = document.querySelector(".close-result");
+const openResultBtn = document.querySelector(".result-button");
+const resultModal = document.querySelector(".results-modal");
+const resultContainer = document.querySelector(".results-container");
+
+const resultMessage = document.querySelector("#result-message");
+const resultTime = document.querySelector("#result-time");
+const resultWrong = document.querySelector("#result-wrong");
+const resultCorrect = document.querySelector("#result-correct");
+const resultAccuracy = document.querySelector("#result-accuracy");
 
 // display variables
 const correctEl = document.getElementById("correct-number");
@@ -18,6 +28,7 @@ let correct = 0;
 let wrong = 0;
 let timeUp = false;
 let timePaused = false;
+let timeTook = 0;
 let timeInterval;
 let animationInterval;
 let restart = false;
@@ -26,6 +37,7 @@ let winner = false;
 let loser = false;
 let firstSelect = null;
 let secondSelect = null;
+let gameEnd = false;
 
 const testArr = [
   ["cat", "dog", "pig", "cow"],
@@ -76,7 +88,6 @@ function handleClick(event) {
       checkCards(event);
     }, "1000");
   }
-  // updateMessage();
 }
 
 // select the card and save it in firstSelect and secondSelect
@@ -133,7 +144,6 @@ function checkCards(event) {
         }
       }
     }
-
     checkWinLose();
     updateMessage(event);
     firstSelect = null;
@@ -146,20 +156,40 @@ function checkWinLose() {
   if (correct === 8) {
     winner = true;
     message = "Congratulations, Yon won!";
+    displayResults(message);
   }
   if (wrong === 5) {
     let delay = 1000;
     const cardsEl = document.querySelectorAll(".inner-card.not-found");
-    console.log(cardsEl);
-    cardsEl.forEach((card) => {
-      setTimeout(() => {
-        card.classList.add("selected");
-      }, delay);
-      delay += 500;
-    });
     loser = true;
     message = "You Loss!";
+
+    function delayResult(timeout) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, timeout);
+      });
+    }
+    async function processCards() {
+      for (const card of cardsEl) {
+        card.classList.add("selected");
+        await delayResult(500);
+      }
+      displayResults(message);
+    }
+    processCards();
   }
+}
+
+// display the result screen
+function displayResults(message) {
+  resultMessage.innerText = message;
+  resultCorrect.innerText = correct;
+  resultWrong.innerText = wrong;
+  resultTime.innerText = secondsToMinutesAndSeconds(timeTook);
+  resultAccuracy.innerText = (correct / (correct + wrong)).toFixed(2) + "%";
+  resultContainer.style.display = "flex";
+  resultModal.style.display = "flex";
+  openResultBtn.style.display = "inline-flex";
 }
 
 // 4. update message
@@ -178,6 +208,7 @@ function restartGame() {
   message = "Pick two cards";
   timePaused = false;
   pauseBtn.innerHTML = "Pause Game";
+  openResultBtn.style.display = "none";
   initializeContainer();
   updateMessage();
 }
@@ -189,6 +220,7 @@ function timerCountDown(gameTime) {
     function tick() {
       let time = document.getElementById("time");
       seconds--;
+      timeTook++;
       time.innerHTML = secondsToMinutesAndSeconds(seconds);
       if (seconds > 0) {
         if (!winner && !loser && !timePaused) {
@@ -240,6 +272,17 @@ closeModalBtn.addEventListener("click", () => {
   modalContainer.style.display = "none";
   pauseGame();
 });
+
+closeResultBtn.addEventListener("click", () => {
+  resultContainer.style.display = "none";
+  resultModal.style.display = "none";
+});
+
+openResultBtn.addEventListener("click", () => {
+  resultContainer.style.display = "flex";
+  resultModal.style.display = "flex";
+});
+
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", pauseGame);
 

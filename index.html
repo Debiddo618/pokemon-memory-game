@@ -11,15 +11,20 @@
     <!-- Result Modal -->
     <div class="results-container">
       <div class="results-modal">
-        <h1>Game Results</h1>
+        <h1>GAME OVER</h1>
         <h2 id="result-message">Message</h2>
         <div class="results">
-          <h2>Here are your results</h2>
+          <h2>Here are your results:</h2>
           <div class="result-time">Time: <span id="result-time"></span></div>
-          <div class="result-correct">Correct: <span id="result-correct-number">0</span></div>
-          <div class="result-wrong">Wrong: <span id="result-wrong-number">0</span></div>
+          <div class="result-correct">
+            Correct: <span id="result-correct"></span>
+          </div>
+          <div class="result-wrong">Wrong: <span id="result-wrong"></span></div>
+          <div class="result-accuracy">
+            Accuracy: <span id="result-accuracy"></span>
+          </div>
         </div>
-        <button class="play-again button">Play Again</button>
+        <button class="close-result button">Close</button>
       </div>
     </div>
     <hr />
@@ -80,6 +85,7 @@
         <button class="rule-button button">Rules</button>
         <button class="pause-button button">Pause Game</button>
         <button class="restart-button button">Restart</button>
+        <button class="result-button button">View Results</button>
       </div>
     </div>
   </body>

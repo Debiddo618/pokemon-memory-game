@@ -16,7 +16,7 @@ body {
     height: 100vh;
 }
 
-.modal-container{
+.modal-container, .results-container{
     position: absolute;
     width: 100%;
     min-height: 100vh;
@@ -30,7 +30,7 @@ body {
     z-index: 1;
 }
 
-.modal {
+.modal, .results-modal {
     display: none;
     position: relative;
     background-color: var(--modal);
@@ -51,45 +51,25 @@ body {
     flex-shrink: 0;
 }
 
-.results-container{
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
+.modal, .modal-container{
     display: flex;
-    /* display: none; */
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    background-color: #fff173;
-    padding: 20px;
-    z-index: 1;
 }
 
-.results-modal {
-    /* display: none; */
-    position: relative;
-    background-color: var(--modal);
+.result-button{
+    display:none;
+}
+
+.results{
     display: flex;
     flex-direction: column;
-    color: white;
-    align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
     gap: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 1;
-    flex-shrink: 0;
+    margin:20px auto;
 }
 
-
-
-
-
+.results-modal h1{
+    margin: 20px auto;;
+}
 
 .description {
     display: flex;
@@ -155,6 +135,11 @@ li {
     }
 }
 
+.message-bar, .info-bar{
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
+}
 /* CSS for the card */
 .inner-card {
     position: relative;
