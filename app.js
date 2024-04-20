@@ -6,6 +6,7 @@ const pauseBtn = document.querySelector(".pause-button");
 const modal = document.querySelector(".modal");
 const modalContainer = document.querySelector(".modal-container");
 
+
 // display variables
 const correctEl = document.getElementById("correct-number");
 const wrongEl = document.getElementById("wrong-number");
@@ -98,6 +99,7 @@ function selectCards(event) {
       event.target.nextElementSibling.classList.add("selected");
     }
     message = "Select another card";
+    updateMessage();
     // checkCards(event);
   }
 }
