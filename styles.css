@@ -55,6 +55,11 @@ body {
     display: flex;
 }
 
+.close-modal, .close-result{
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
 .result-button{
     display:none;
 }

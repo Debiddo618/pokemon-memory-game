@@ -37,7 +37,7 @@ let winner = false;
 let loser = false;
 let firstSelect = null;
 let secondSelect = null;
-let gameEnd = false;
+let gameStart = false;
 
 const testArr = [
   ["cat", "dog", "pig", "cow"],
@@ -267,10 +267,15 @@ openModalBtn.addEventListener("click", () => {
     pauseGame();
   }
 });
+
 closeModalBtn.addEventListener("click", () => {
   modal.style.display = "none";
   modalContainer.style.display = "none";
   pauseGame();
+  if (!gameStart) {
+    restartGame();
+    gameStart = true;
+  }
 });
 
 closeResultBtn.addEventListener("click", () => {
