@@ -9,37 +9,39 @@
   </head>
   <body>
     <!-- Modal -->
-    <div class="modal">
-      <h1>Welcome!</h1>
-      <div class="description">
-        <div class="game-rules">
-          <h2>Game Rules</h2>
-          <ol>
-            <li>You will flip two cards face-up.</li>
-            <li>If the cards are a pair, then they are removed.</li>
-            <li>If not, then they are flipped back down.</li>
-            <li>
-              You will have 5 mins to clear the board and 5 wrong attempts.
-            </li>
-          </ol>
+    <div class="modal-container">
+      <div class="modal">
+        <h1>Welcome!</h1>
+        <div class="description">
+          <div class="game-rules">
+            <h2>Game Rules</h2>
+            <ol>
+              <li>You will flip two cards face-up.</li>
+              <li>If the cards are a pair, then they are removed.</li>
+              <li>If not, then they are flipped back down.</li>
+              <li>
+                You will have 5 mins to clear the board and 5 wrong attempts.
+              </li>
+            </ol>
+          </div>
+          <div class="win-conditions">
+            <h2>Win Conditions</h2>
+            <ol>
+              <li>
+                You matched all cards and clear the board within the time limit
+              </li>
+            </ol>
+          </div>
+          <div class="lose-conditions">
+            <h2>Lose Conditions</h2>
+            <ol>
+              <li>You failed to match the cards 5 times</li>
+              <li>You failed to clear the board within 5 mins</li>
+            </ol>
+          </div>
         </div>
-        <div class="win-conditions">
-          <h2>Win Conditions</h2>
-          <ol>
-            <li>
-              You matched all cards and clear the board within the time limit
-            </li>
-          </ol>
-        </div>
-        <div class="lose-conditions">
-          <h2>Lose Conditions</h2>
-          <ol>
-            <li>You failed to match the cards 5 times</li>
-            <li>You failed to clear the board within 5 mins</li>
-          </ol>
-        </div>
+        <button class="close-modal button">Close</button>
       </div>
-      <button class="close-modal button">Close</button>
     </div>
 
     <!-- Main Container -->
@@ -56,7 +58,7 @@
       <div class="card-container"></div>
       <!-- Message Bar -->
       <div class="message-bar"><span id="message">Pick two cards</span></div>
-      
+
       <!-- buttons Container -->
       <div class="button-bar">
         <button class="rule-button button">Rules</button>

@@ -4,6 +4,7 @@ const closeModalBtn = document.querySelector(".close-modal");
 const restartBtn = document.querySelector(".restart-button");
 const pauseBtn = document.querySelector(".pause-button");
 const modal = document.querySelector(".modal");
+const modalContainer = document.querySelector(".modal-container");
 
 // display variables
 const correctEl = document.getElementById("correct-number");
@@ -42,6 +43,7 @@ function initializeContainer() {
 
       const innerCard = document.createElement("div");
       innerCard.classList.add("inner-card");
+      innerCard.classList.add("not-found");
       innerCard.id = testArr[i][j];
 
       const frontCard = document.createElement("div");
@@ -68,14 +70,12 @@ function initializeContainer() {
 // handle click
 function handleClick(event) {
   selectCards(event);
-  if(secondSelect !== null){
+  if (secondSelect !== null) {
     setTimeout(() => {
       checkCards(event);
     }, "1000");
   }
-  checkWinLose();
-  console.log("Message about update message");
-  updateMessage();
+  // updateMessage();
 }
 
 // select the card and save it in firstSelect and secondSelect
@@ -94,8 +94,8 @@ function selectCards(event) {
         }
       }
       event.target.classList.add("selected");
-      const innerCard = event.target.parentNode;
-      innerCard.classList.add("selected");
+      event.target.parentNode.classList.add("selected");
+      event.target.nextElementSibling.classList.add("selected");
     }
     message = "Select another card";
     // checkCards(event);
@@ -104,37 +104,39 @@ function selectCards(event) {
 
 // 2. check if the cards, matches
 function checkCards(event) {
-  console.log("Beginning of checkCards");
   if (firstSelect !== null && secondSelect !== null && !timePaused) {
-    console.log("Inside first if in check cards");
-    if (firstSelect.id === secondSelect.id) {
-      console.log("They are equal");
-      firstSelect.classList.remove("selected");
-      firstSelect.classList.add("removed");
-      secondSelect.classList.remove("selected");
-      secondSelect.classList.add("removed");
-      message = "Nice!";
-      correct++;
-
-    } else {
-        if(firstSelect.id !== secondSelect.id){
+    if (
+      firstSelect.parentNode.classList.contains("not-found") &&
+      secondSelect.parentNode.classList.contains("not-found")
+    ) {
+      if (firstSelect.id === secondSelect.id) {
+        firstSelect.classList.remove("selected");
+        firstSelect.classList.add("removed");
+        firstSelect.parentNode.classList.remove("not-found");
+        secondSelect.classList.remove("selected");
+        secondSelect.classList.add("removed");
+        secondSelect.parentNode.classList.remove("not-found");
+        message = "Nice!";
+        correct++;
+      } else {
+        if (firstSelect.id !== secondSelect.id) {
           firstSelect.classList.remove("selected");
           secondSelect.classList.remove("selected");
           const firstInner = firstSelect.parentNode;
           const secondInner = secondSelect.parentNode;
-          // console.error(firstInner, secondInner);
           firstInner.classList.remove("selected");
           secondInner.classList.remove("selected");
           message = "Incorrect Match!";
           wrong++;
         }
-
+      }
     }
+
+    checkWinLose();
     updateMessage(event);
     firstSelect = null;
     secondSelect = null;
   }
-  console.log("End of checkCards");
 }
 
 // 3. check win condition
@@ -144,6 +146,15 @@ function checkWinLose() {
     message = "Congratulations, Yon won!";
   }
   if (wrong === 5) {
+    let delay = 1000;
+    const cardsEl = document.querySelectorAll(".inner-card.not-found");
+    console.log(cardsEl);
+    cardsEl.forEach((card) => {
+      setTimeout(() => {
+        card.classList.add("selected");
+      }, delay);
+      delay += 500;
+    });
     loser = true;
     message = "You Loss!";
   }
@@ -151,7 +162,6 @@ function checkWinLose() {
 
 // 4. update message
 function updateMessage() {
-  console.log("Inside update Message:",correct,wrong);
   wrongEl.innerText = wrong;
   correctEl.innerText = correct;
   messageEl.innerText = message;
@@ -218,12 +228,14 @@ function secondsToMinutesAndSeconds(seconds) {
 // event listeners
 openModalBtn.addEventListener("click", () => {
   modal.style.display = "flex";
+  modalContainer.style.display = "flex";
   if (!timePaused) {
     pauseGame();
   }
 });
 closeModalBtn.addEventListener("click", () => {
   modal.style.display = "none";
+  modalContainer.style.display = "none";
   pauseGame();
 });
 restartBtn.addEventListener("click", restartGame);
