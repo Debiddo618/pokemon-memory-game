@@ -17,6 +17,7 @@ let wrong = 0;
 let timeUp = false;
 let timePaused = false;
 let timeInterval;
+let animationInterval;
 let restart = false;
 let seconds = 0;
 let winner = false;
@@ -37,8 +38,26 @@ function initializeContainer() {
     for (let j = 0; j < 4; j++) {
       const card = document.createElement("div");
       card.classList.add("card");
-      card.innerText = testArr[i][j];
       card.id = testArr[i][j];
+
+      const innerCard = document.createElement("div");
+      innerCard.classList.add("inner-card");
+      innerCard.id = testArr[i][j];
+
+      const frontCard = document.createElement("div");
+      frontCard.classList.add("front-card");
+      frontCard.innerText = "Front of the card";
+      frontCard.id = testArr[i][j];
+
+      const backCard = document.createElement("div");
+      backCard.classList.add("back-card");
+      backCard.innerText = testArr[i][j];
+      backCard.id = testArr[i][j];
+
+      innerCard.append(frontCard);
+      innerCard.append(backCard);
+
+      card.append(innerCard);
       card.addEventListener("click", handleClick);
       cardContainer.appendChild(card);
     }
@@ -47,14 +66,19 @@ function initializeContainer() {
 }
 
 // handle click
-const handleClick = (event) => {
+function handleClick(event) {
   selectCards(event);
-  checkCards(event);
+  if(secondSelect !== null){
+    setTimeout(() => {
+      checkCards(event);
+    }, "1000");
+  }
   checkWinLose();
+  console.log("Message about update message");
   updateMessage();
-};
+}
 
-// 1. push the card into the select card array
+// select the card and save it in firstSelect and secondSelect
 function selectCards(event) {
   if (!winner && !loser && !timePaused) {
     if (
@@ -65,34 +89,52 @@ function selectCards(event) {
       if (firstSelect === null) {
         firstSelect = event.target;
       } else {
-        secondSelect = event.target;
+        if (secondSelect == null) {
+          secondSelect = event.target;
+        }
       }
       event.target.classList.add("selected");
+      const innerCard = event.target.parentNode;
+      innerCard.classList.add("selected");
     }
-    // console.log(firstSelect, secondSelect);
     message = "Select another card";
+    // checkCards(event);
   }
 }
 
 // 2. check if the cards, matches
 function checkCards(event) {
+  console.log("Beginning of checkCards");
   if (firstSelect !== null && secondSelect !== null && !timePaused) {
+    console.log("Inside first if in check cards");
     if (firstSelect.id === secondSelect.id) {
+      console.log("They are equal");
       firstSelect.classList.remove("selected");
       firstSelect.classList.add("removed");
       secondSelect.classList.remove("selected");
       secondSelect.classList.add("removed");
       message = "Nice!";
       correct++;
+
     } else {
-      firstSelect.classList.remove("selected");
-      secondSelect.classList.remove("selected");
-      message = "Incorrect Match!";
-      wrong++;
+        if(firstSelect.id !== secondSelect.id){
+          firstSelect.classList.remove("selected");
+          secondSelect.classList.remove("selected");
+          const firstInner = firstSelect.parentNode;
+          const secondInner = secondSelect.parentNode;
+          // console.error(firstInner, secondInner);
+          firstInner.classList.remove("selected");
+          secondInner.classList.remove("selected");
+          message = "Incorrect Match!";
+          wrong++;
+        }
+
     }
+    updateMessage(event);
     firstSelect = null;
     secondSelect = null;
   }
+  console.log("End of checkCards");
 }
 
 // 3. check win condition
@@ -109,6 +151,7 @@ function checkWinLose() {
 
 // 4. update message
 function updateMessage() {
+  console.log("Inside update Message:",correct,wrong);
   wrongEl.innerText = wrong;
   correctEl.innerText = correct;
   messageEl.innerText = message;
@@ -156,10 +199,8 @@ function pauseGame() {
   if (!timePaused) {
     timePaused = true;
     pauseBtn.innerHTML = "Resume Game";
-    console.log("Game is paused!");
   } else {
     timePaused = false;
-    console.log("Game is running");
     pauseBtn.innerHTML = "Pause Game";
     timerCountDown(seconds);
   }
