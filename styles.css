@@ -55,7 +55,8 @@ body {
 
 .modal,
 .modal-container {
-    display: flex;
+    /* display: flex; */
+    display: none;
 }
 
 .close-modal,

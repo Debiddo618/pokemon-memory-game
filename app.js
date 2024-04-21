@@ -23,6 +23,50 @@ const wrongEl = document.getElementById("wrong-number");
 const timeEl = document.getElementById("time");
 const messageEl = document.getElementById("message");
 
+let pokemonArr = fetchPokemons();
+
+// get 8 random
+function randomNumbers(){
+  let numbers = [];
+  while(numbers.length<8){
+    let number = Math.floor(Math.random() * 151);
+    if(!numbers.includes(number)){
+      numbers.push(number);
+    }
+  }
+  return numbers;
+}
+
+function fetchPokemons(){
+  let url ="https://pokeapi.co/api/v2/pokemon/"
+  let numbers = randomNumbers();
+  const pokemons = [];
+
+  for(let i=0;i<numbers.length;i++){
+    fetch(`${url}${numbers[i]}`)
+      .then(response => response.json())
+      .then(pokemon => {
+        let pokemonTypes = "";
+        pokemon.types.forEach((type) => {
+          pokemonTypes +=
+            type.type.name.charAt(0).toUpperCase() +
+            type.type.name.slice(1) +
+            " ";
+        });
+        let pokemonObj = {
+          name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+          types: pokemonTypes,
+          image: pokemon.sprites.other.dream_world.front_default,
+          showdown: pokemon.sprites.other.showdown.front_default,
+        };
+        pokemons.push(pokemonObj);
+      })
+  }
+  return pokemons;
+}
+console.log(pokemonArr);
+
+
 // let selectedCards = [];
 let correct = 0;
 let wrong = 0;
@@ -77,7 +121,7 @@ function initializeContainer() {
       cardContainer.appendChild(card);
     }
   }
-  timerCountDown(10);
+  timerCountDown(300);
 }
 
 // handle click
