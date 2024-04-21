@@ -16,7 +16,8 @@ body {
     height: 100vh;
 }
 
-.modal-container, .results-container{
+.modal-container,
+.results-container {
     position: absolute;
     width: 100%;
     min-height: 100vh;
@@ -30,7 +31,8 @@ body {
     z-index: 1;
 }
 
-.modal, .results-modal {
+.modal,
+.results-modal {
     display: none;
     position: relative;
     background-color: var(--modal);
@@ -51,29 +53,32 @@ body {
     flex-shrink: 0;
 }
 
-.modal, .modal-container{
+.modal,
+.modal-container {
     display: flex;
 }
 
-.close-modal, .close-result{
+.close-modal,
+.close-result {
     align-self: flex-end;
     margin-right: 20px;
 }
 
-.result-button{
-    display:none;
+.result-button {
+    display: none;
 }
 
-.results{
+.results {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
-.results-modal h1{
-    margin: 20px auto;;
+.results-modal h1 {
+    margin: 20px auto;
+    ;
 }
 
 .description {
@@ -140,11 +145,13 @@ li {
     }
 }
 
-.message-bar, .info-bar{
+.message-bar,
+.info-bar {
     margin: 10px auto;
     font-size: 20px;
     font-weight: bold;
 }
+
 /* CSS for the card */
 .inner-card {
     position: relative;
@@ -191,3 +198,6 @@ li {
     justify-content: space-evenly;
 }
 
+.removed {
+    opacity: 0.2;
+}

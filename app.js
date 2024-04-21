@@ -77,7 +77,7 @@ function initializeContainer() {
       cardContainer.appendChild(card);
     }
   }
-  timerCountDown(300);
+  timerCountDown(10);
 }
 
 // handle click
@@ -126,9 +126,13 @@ function checkCards(event) {
         firstSelect.classList.remove("selected");
         firstSelect.classList.add("removed");
         firstSelect.parentNode.classList.remove("not-found");
+        firstSelect.nextElementSibling.classList.add("removed");
+
         secondSelect.classList.remove("selected");
         secondSelect.classList.add("removed");
         secondSelect.parentNode.classList.remove("not-found");
+        secondSelect.nextElementSibling.classList.add("removed");
+
         message = "Nice!";
         correct++;
       } else {
