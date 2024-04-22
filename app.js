@@ -111,13 +111,6 @@ let firstSelect = null;
 let secondSelect = null;
 let gameStart = false;
 
-// const testArr = [
-//   ["cat", "dog", "pig", "cow"],
-//   ["cat", "dog", "pig", "cow"],
-//   ["bat", "rat", "horse", "goat"],
-//   ["bat", "rat", "horse", "goat"],
-// ];
-
 // initializing the card container
 function initializeContainer(array) {
   for (let i = 0; i < 4; i++) {
@@ -133,12 +126,10 @@ function initializeContainer(array) {
 
       const frontCard = document.createElement("div");
       frontCard.classList.add("front-card");
-      // frontCard.innerText = array[i][j].name;
       frontCard.id = array[i][j].name;
 
       const backCard = document.createElement("div");
       backCard.classList.add("back-card");
-      // backCard.innerText = array[i][j].name;
       backCard.id = array[i][j].name;
       backCard.style.backgroundImage = `url(${array[i][j].image})`;
 
@@ -184,11 +175,10 @@ function selectCards(event) {
     }
     message = "Select another card";
     updateMessage();
-    // checkCards(event);
   }
 }
 
-// 2. check if the cards, matches
+// check if the cards, matches
 function checkCards(event) {
   if (firstSelect !== null && secondSelect !== null && !timePaused) {
     if (
@@ -228,7 +218,7 @@ function checkCards(event) {
   }
 }
 
-// 3. check win condition
+// check win condition
 function checkWinLose() {
   if (correct === 8) {
     winner = true;
@@ -269,7 +259,7 @@ function displayResults(message) {
   openResultBtn.style.display = "inline-flex";
 }
 
-// 4. update message
+// update message
 function updateMessage() {
   wrongEl.innerText = wrong;
   correctEl.innerText = correct;
@@ -298,7 +288,6 @@ function restartGame() {
     initializeContainer(randomize2DPokemons);
     updateMessage();
   });
-  // initializeContainer();
 }
 
 // timer count down
@@ -378,5 +367,3 @@ openResultBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", pauseGame);
-
-// initializeContainer();

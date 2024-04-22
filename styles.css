@@ -194,6 +194,9 @@ li {
     color: white;
     transform: rotateY(180deg);
     border-radius: 10px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
