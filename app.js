@@ -133,7 +133,7 @@ function initializeContainer(array) {
 
       const frontCard = document.createElement("div");
       frontCard.classList.add("front-card");
-      frontCard.innerText = "Front of the card";
+      frontCard.innerText = array[i][j].name;
       frontCard.id = array[i][j].name;
 
       const backCard = document.createElement("div");
@@ -285,8 +285,19 @@ function restartGame() {
   timePaused = false;
   pauseBtn.innerHTML = "Pause Game";
   openResultBtn.style.display = "none";
-  initializeContainer();
-  updateMessage();
+  fetchPokemons().then((pokemons) => {
+    let doubledPokemons = [];
+    pokemons.forEach((pokemon) => {
+      doubledPokemons.push(pokemon);
+      doubledPokemons.push(pokemon);
+    });
+    let randomizePokemons = shuffleArray(doubledPokemons);
+    let randomize2DPokemons = convertTo2DArray(randomizePokemons);
+    console.log(randomize2DPokemons);
+    initializeContainer(randomize2DPokemons);
+    updateMessage();
+  });
+  // initializeContainer();
 }
 
 // timer count down
