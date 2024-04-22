@@ -5,6 +5,7 @@ const restartBtn = document.querySelector(".restart-button");
 const pauseBtn = document.querySelector(".pause-button");
 const modal = document.querySelector(".modal");
 const modalContainer = document.querySelector(".modal-container");
+const musicBtn = document.querySelector(".music-button");
 
 const closeResultBtn = document.querySelector(".close-result");
 const openResultBtn = document.querySelector(".result-button");
@@ -281,7 +282,6 @@ function restartGame() {
     });
     let randomizePokemons = shuffleArray(doubledPokemons);
     let randomize2DPokemons = convertTo2DArray(randomizePokemons);
-    console.log(randomize2DPokemons);
     initializeContainer(randomize2DPokemons);
     updateMessage();
   });
@@ -370,3 +370,19 @@ restartBtn.addEventListener("click", restartGame);
 
 // pause game
 pauseBtn.addEventListener("click", pauseGame);
+
+// mute or play background music
+musicBtn.addEventListener("click", muteMusic);
+
+// play or mute music
+function muteMusic() {
+  if (document.querySelector("#audio").paused) {
+    let audio = document.querySelector("#audio");
+    audio.play();
+    audio.volume = 0.2;
+    musicBtn.innerText = "Mute Music";
+  } else {
+    document.querySelector("#audio").pause();
+    musicBtn.innerText = "Play Music";
+  }
+}

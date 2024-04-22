@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="#" />
     <script defer src="app.js"></script>
     <title>Pokemon Memory Game</title>
   </head>
@@ -83,9 +84,15 @@
       <!-- buttons Container -->
       <div class="button-bar">
         <button class="rule-button button">Rules</button>
+        <button class="music-button button">Play Music</button>
         <button class="pause-button button">Pause Game</button>
         <button class="restart-button button">Restart</button>
         <button class="result-button button">View Results</button>
+        <div>
+          <audio id="audio" autoplay loop>
+            <source src="./audio/littleRootTown.mp3" />
+          </audio>
+        </div>
       </div>
     </div>
   </body>
