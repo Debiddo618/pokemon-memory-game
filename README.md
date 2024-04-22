@@ -21,7 +21,7 @@ The documentation for the Pokemon API can be found with this [link](https://poke
 - HTML
 - CSS
 
-## Next Steps
+## Next Steps:
 Here are some potential improvements to the project:
 
 - Add new layouts using CSS grid
