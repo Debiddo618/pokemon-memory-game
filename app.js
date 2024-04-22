@@ -139,6 +139,7 @@ function initializeContainer(array) {
       cardContainer.appendChild(card);
     }
   }
+  timeTook = 0;
   timerCountDown(300);
 }
 
@@ -267,7 +268,7 @@ function updateMessage() {
 function restartGame() {
   cardContainer.innerHTML = "";
   firstSelect = secondSelect = null;
-  correct = wrong = timeTook = 0;
+  correct = wrong = 0;
   winner = loser = false;
   message = "Pick two cards";
   timePaused = false;
