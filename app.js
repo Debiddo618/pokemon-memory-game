@@ -125,6 +125,7 @@ function initializeContainer(array) {
       const frontCard = document.createElement("div");
       frontCard.classList.add("front-card");
       frontCard.id = array[i][j].name;
+      frontCard.addEventListener("click", handleClick);
 
       const backCard = document.createElement("div");
       backCard.classList.add("back-card");
@@ -135,7 +136,6 @@ function initializeContainer(array) {
       innerCard.append(backCard);
 
       card.append(innerCard);
-      card.addEventListener("click", handleClick);
       cardContainer.appendChild(card);
     }
   }
@@ -221,7 +221,7 @@ function removeSelected(card) {
 function checkWinLose() {
   if (correct === 8) {
     winner = true;
-    message = "Congratulations, You won!";
+    message = "Congratulations, You Won!";
     displayResults(message);
   }
   if (wrong === 5) {

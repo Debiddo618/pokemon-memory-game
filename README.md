@@ -27,3 +27,4 @@ Here are some potential improvements to the project:
 - Add new layouts using CSS grid
 - Add more levels to the game
 - Add animations to the gameboard before game starts and after game ends
+- Compatibility with mobile devices
