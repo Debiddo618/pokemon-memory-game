@@ -49,7 +49,7 @@ function randomNumbers() {
   }
   return numbers;
 }
-//252, 386
+
 // get and return an array of 8 random pokemons
 async function fetchPokemons() {
   let url = "https://pokeapi.co/api/v2/pokemon/";
@@ -89,6 +89,7 @@ fetchPokemons().then((pokemons) => {
   let randomizePokemons = shuffleArray(doubledPokemons);
   let randomize2DPokemons = convertTo2DArray(randomizePokemons);
   initializeContainer(randomize2DPokemons);
+  muteMusic();
 });
 
 // change 1D array to 2D
@@ -333,6 +334,19 @@ function secondsToMinutesAndSeconds(seconds) {
     : minutes + ":" + remainderSeconds;
 }
 
+// play or mute music
+function muteMusic() {
+  if (document.querySelector("#audio").paused) {
+    let audio = document.querySelector("#audio");
+    audio.play();
+    audio.volume = 0.2;
+    musicBtn.innerText = "Mute Music";
+  } else {
+    document.querySelector("#audio").pause();
+    musicBtn.innerText = "Play Music";
+  }
+}
+
 // open modal and pause the game
 openModalBtn.addEventListener("click", () => {
   modal.style.display = "flex";
@@ -373,16 +387,3 @@ pauseBtn.addEventListener("click", pauseGame);
 
 // mute or play background music
 musicBtn.addEventListener("click", muteMusic);
-
-// play or mute music
-function muteMusic() {
-  if (document.querySelector("#audio").paused) {
-    let audio = document.querySelector("#audio");
-    audio.play();
-    audio.volume = 0.2;
-    musicBtn.innerText = "Mute Music";
-  } else {
-    document.querySelector("#audio").pause();
-    musicBtn.innerText = "Play Music";
-  }
-}
