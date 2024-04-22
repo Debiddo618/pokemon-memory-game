@@ -6,7 +6,7 @@ This is a single-player memory game created using vanilla JavaScript, HTML, and 
 ## Getting Started:
 You can access the game by clicking the link [here](https://debiddo618.github.io/pokemon-memory-game/).
 
-## Attributions
+## Attributions:
 The documentation for the Pokemon API can be found with this [link](https://pokeapi.co/docs/v2).
 
 ## Game Images:
@@ -17,11 +17,11 @@ The documentation for the Pokemon API can be found with this [link](https://poke
 
 ## Technologies Used:
 
-- Javascript
+- JavaScript
 - HTML
 - CSS
 
-## Next Steps
+## Next Steps:
 Here are some potential improvements to the project:
 
 - Add new layouts using CSS grid
