@@ -221,13 +221,13 @@ function removeSelected(card) {
 function checkWinLose() {
   if (correct === 8) {
     winner = true;
-    message = "Congratulations, Yon won!";
+    message = "Congratulations, You won!";
     displayResults(message);
   }
   if (wrong === 5) {
     const cardsEl = document.querySelectorAll(".inner-card.not-found");
     loser = true;
-    message = "You Loss!";
+    message = "You Lose!";
 
     function delayResult(timeout) {
       return new Promise((resolve) => {
@@ -251,7 +251,8 @@ function displayResults(message) {
   resultCorrect.innerText = correct;
   resultWrong.innerText = wrong;
   resultTime.innerText = secondsToMinutesAndSeconds(timeTook);
-  resultAccuracy.innerText = (correct / (correct + wrong)).toFixed(2) + "%";
+  resultAccuracy.innerText =
+    (correct / (correct + wrong)).toFixed(2) * 100 + "%";
   resultContainer.style.display = "flex";
   resultModal.style.display = "flex";
   openResultBtn.style.display = "inline-flex";
@@ -302,7 +303,7 @@ function timerCountDown(gameTime) {
           timeInterval = setTimeout(tick, 1000);
         }
       } else {
-        message = "Time is up! You Loss!";
+        message = "Time is up! You Lose!";
         loser = true;
         timeUp = true;
         updateMessage();
