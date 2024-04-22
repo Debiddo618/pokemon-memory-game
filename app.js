@@ -17,15 +17,27 @@ const resultWrong = document.querySelector("#result-wrong");
 const resultCorrect = document.querySelector("#result-correct");
 const resultAccuracy = document.querySelector("#result-accuracy");
 
-// display variables
 const correctEl = document.getElementById("correct-number");
 const wrongEl = document.getElementById("wrong-number");
 const timeEl = document.getElementById("time");
 const messageEl = document.getElementById("message");
 
-let pokemonArr;
+let correct = 0;
+let wrong = 0;
+let timeUp = false;
+let timePaused = false;
+let timeTook = 0;
+let timeInterval;
+let animationInterval;
+let restart = false;
+let seconds = 0;
+let winner = false;
+let loser = false;
+let firstSelect = null;
+let secondSelect = null;
+let gameStart = false;
 
-// get 8 random
+// get 8 random numbers
 function randomNumbers() {
   let numbers = [];
   while (numbers.length < 8) {
@@ -37,7 +49,7 @@ function randomNumbers() {
   return numbers;
 }
 
-// get an array of pokemons
+// get and return an array of 8 random pokemons
 async function fetchPokemons() {
   let url = "https://pokeapi.co/api/v2/pokemon/";
   let numbers = randomNumbers();
@@ -66,6 +78,7 @@ async function fetchPokemons() {
   return pokemons;
 }
 
+// double the pokemon array, randomize it and initial the game board
 fetchPokemons().then((pokemons) => {
   let doubledPokemons = [];
   pokemons.forEach((pokemon) => {
@@ -74,7 +87,6 @@ fetchPokemons().then((pokemons) => {
   });
   let randomizePokemons = shuffleArray(doubledPokemons);
   let randomize2DPokemons = convertTo2DArray(randomizePokemons);
-  console.log(randomize2DPokemons);
   initializeContainer(randomize2DPokemons);
 });
 
@@ -95,21 +107,6 @@ function shuffleArray(array) {
   }
   return array;
 }
-
-let correct = 0;
-let wrong = 0;
-let timeUp = false;
-let timePaused = false;
-let timeTook = 0;
-let timeInterval;
-let animationInterval;
-let restart = false;
-let seconds = 0;
-let winner = false;
-let loser = false;
-let firstSelect = null;
-let secondSelect = null;
-let gameStart = false;
 
 // initializing the card container
 function initializeContainer(array) {
@@ -186,16 +183,8 @@ function checkCards(event) {
       secondSelect.parentNode.classList.contains("not-found")
     ) {
       if (firstSelect.id === secondSelect.id) {
-        firstSelect.classList.remove("selected");
-        firstSelect.classList.add("removed");
-        firstSelect.parentNode.classList.remove("not-found");
-        firstSelect.nextElementSibling.classList.add("removed");
-
-        secondSelect.classList.remove("selected");
-        secondSelect.classList.add("removed");
-        secondSelect.parentNode.classList.remove("not-found");
-        secondSelect.nextElementSibling.classList.add("removed");
-
+        removeSelected(firstSelect);
+        removeSelected(secondSelect);
         message = `Nice! You caught ${firstSelect.id}!`;
         correct++;
       } else {
@@ -216,6 +205,14 @@ function checkCards(event) {
     firstSelect = null;
     secondSelect = null;
   }
+}
+
+// remove selected
+function removeSelected(card) {
+  card.classList.remove("selected");
+  card.classList.add("removed");
+  card.parentNode.classList.remove("not-found");
+  card.nextElementSibling.classList.add("removed");
 }
 
 // check win condition
@@ -315,7 +312,7 @@ function timerCountDown(gameTime) {
   }
 }
 
-// pauseGame
+// pause the game
 function pauseGame() {
   if (!timePaused) {
     timePaused = true;
@@ -336,7 +333,7 @@ function secondsToMinutesAndSeconds(seconds) {
     : minutes + ":" + remainderSeconds;
 }
 
-// event listeners
+// open modal and pause the game
 openModalBtn.addEventListener("click", () => {
   modal.style.display = "flex";
   modalContainer.style.display = "flex";
@@ -345,6 +342,7 @@ openModalBtn.addEventListener("click", () => {
   }
 });
 
+// close modal and start the game
 closeModalBtn.addEventListener("click", () => {
   modal.style.display = "none";
   modalContainer.style.display = "none";
@@ -355,15 +353,20 @@ closeModalBtn.addEventListener("click", () => {
   }
 });
 
+// close result modal
 closeResultBtn.addEventListener("click", () => {
   resultContainer.style.display = "none";
   resultModal.style.display = "none";
 });
 
+// open result modal
 openResultBtn.addEventListener("click", () => {
   resultContainer.style.display = "flex";
   resultModal.style.display = "flex";
 });
 
+// restart game
 restartBtn.addEventListener("click", restartGame);
+
+// pause game
 pauseBtn.addEventListener("click", pauseGame);
