@@ -177,12 +177,15 @@ li {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    background-size: cover;
 }
 
 .front-card {
-    background-color: #bbb;
     color: black;
     border-radius: 10px;
+    background-image: url("images/pokeball.png");
+    background-color: #8576FF;
+    background-position: center;
 }
 
 .back-card {

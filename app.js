@@ -111,12 +111,12 @@ let firstSelect = null;
 let secondSelect = null;
 let gameStart = false;
 
-const testArr = [
-  ["cat", "dog", "pig", "cow"],
-  ["cat", "dog", "pig", "cow"],
-  ["bat", "rat", "horse", "goat"],
-  ["bat", "rat", "horse", "goat"],
-];
+// const testArr = [
+//   ["cat", "dog", "pig", "cow"],
+//   ["cat", "dog", "pig", "cow"],
+//   ["bat", "rat", "horse", "goat"],
+//   ["bat", "rat", "horse", "goat"],
+// ];
 
 // initializing the card container
 function initializeContainer(array) {
@@ -133,13 +133,14 @@ function initializeContainer(array) {
 
       const frontCard = document.createElement("div");
       frontCard.classList.add("front-card");
-      frontCard.innerText = array[i][j].name;
+      // frontCard.innerText = array[i][j].name;
       frontCard.id = array[i][j].name;
 
       const backCard = document.createElement("div");
       backCard.classList.add("back-card");
-      backCard.innerText = array[i][j].name;
+      // backCard.innerText = array[i][j].name;
       backCard.id = array[i][j].name;
+      backCard.style.backgroundImage = `url(${array[i][j].image})`;
 
       innerCard.append(frontCard);
       innerCard.append(backCard);
