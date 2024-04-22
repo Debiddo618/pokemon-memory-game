@@ -23,29 +23,30 @@ const wrongEl = document.getElementById("wrong-number");
 const timeEl = document.getElementById("time");
 const messageEl = document.getElementById("message");
 
-let pokemonArr = fetchPokemons();
+let pokemonArr;
 
 // get 8 random
-function randomNumbers(){
+function randomNumbers() {
   let numbers = [];
-  while(numbers.length<8){
-    let number = Math.floor(Math.random() * 151);
-    if(!numbers.includes(number)){
+  while (numbers.length < 8) {
+    let number = Math.floor(Math.random() * 150) + 1;
+    if (!numbers.includes(number)) {
       numbers.push(number);
     }
   }
   return numbers;
 }
 
-function fetchPokemons(){
-  let url ="https://pokeapi.co/api/v2/pokemon/"
+// get an array of pokemons
+async function fetchPokemons() {
+  let url = "https://pokeapi.co/api/v2/pokemon/";
   let numbers = randomNumbers();
   const pokemons = [];
 
-  for(let i=0;i<numbers.length;i++){
-    fetch(`${url}${numbers[i]}`)
-      .then(response => response.json())
-      .then(pokemon => {
+  for (let i = 0; i < numbers.length; i++) {
+    await fetch(`${url}${numbers[i]}`)
+      .then((response) => response.json())
+      .then((pokemon) => {
         let pokemonTypes = "";
         pokemon.types.forEach((type) => {
           pokemonTypes +=
@@ -60,14 +61,41 @@ function fetchPokemons(){
           showdown: pokemon.sprites.other.showdown.front_default,
         };
         pokemons.push(pokemonObj);
-      })
+      });
   }
   return pokemons;
 }
-console.log(pokemonArr);
 
+fetchPokemons().then((pokemons) => {
+  let doubledPokemons = [];
+  pokemons.forEach((pokemon) => {
+    doubledPokemons.push(pokemon);
+    doubledPokemons.push(pokemon);
+  });
+  let randomizePokemons = shuffleArray(doubledPokemons);
+  let randomize2DPokemons = convertTo2DArray(randomizePokemons);
+  console.log(randomize2DPokemons);
+  initializeContainer(randomize2DPokemons);
+});
 
-// let selectedCards = [];
+// change 1D array to 2D
+function convertTo2DArray(array) {
+  const result = [];
+  for (let i = 0; i < 4; i++) {
+    result.push(array.slice(i * 4, i * 4 + 4));
+  }
+  return result;
+}
+
+// function randomize array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 let correct = 0;
 let wrong = 0;
 let timeUp = false;
@@ -91,27 +119,27 @@ const testArr = [
 ];
 
 // initializing the card container
-function initializeContainer() {
+function initializeContainer(array) {
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       const card = document.createElement("div");
       card.classList.add("card");
-      card.id = testArr[i][j];
+      card.id = array[i][j].name;
 
       const innerCard = document.createElement("div");
       innerCard.classList.add("inner-card");
       innerCard.classList.add("not-found");
-      innerCard.id = testArr[i][j];
+      innerCard.id = array[i][j].name;
 
       const frontCard = document.createElement("div");
       frontCard.classList.add("front-card");
       frontCard.innerText = "Front of the card";
-      frontCard.id = testArr[i][j];
+      frontCard.id = array[i][j].name;
 
       const backCard = document.createElement("div");
       backCard.classList.add("back-card");
-      backCard.innerText = testArr[i][j];
-      backCard.id = testArr[i][j];
+      backCard.innerText = array[i][j].name;
+      backCard.id = array[i][j].name;
 
       innerCard.append(frontCard);
       innerCard.append(backCard);
@@ -339,4 +367,4 @@ openResultBtn.addEventListener("click", () => {
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", pauseGame);
 
-initializeContainer();
+// initializeContainer();
