@@ -335,9 +335,7 @@ function secondsToMinutesAndSeconds(seconds) {
 // play or mute music
 function muteMusic() {
   if (document.querySelector("#audio").paused) {
-    let audio = document.querySelector("#audio");
-    audio.play();
-    audio.volume = 0.2;
+    document.querySelector("#audio").play();
     musicBtn.innerText = "Mute Music";
   } else {
     document.querySelector("#audio").pause();
