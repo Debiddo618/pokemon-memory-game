@@ -38,7 +38,7 @@ let firstSelect = null;
 let secondSelect = null;
 let gameStart = false;
 
-// get 8 random numbers
+// get 8 random numbers from 252 to 386
 function randomNumbers() {
   let numbers = [];
   while (numbers.length < 8) {
@@ -79,7 +79,7 @@ async function fetchPokemons() {
   return pokemons;
 }
 
-// double the pokemon array, randomize it and initial the game board
+// double the pokemon array, randomize it and initialize the game board
 fetchPokemons().then((pokemons) => {
   let doubledPokemons = [];
   pokemons.forEach((pokemon) => {
