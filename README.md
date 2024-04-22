@@ -17,7 +17,7 @@ The documentation for the Pokemon API can be found with this [link](https://poke
 
 ## Technologies Used:
 
-- Javascript
+- JavaScript
 - HTML
 - CSS
 
