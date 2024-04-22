@@ -89,7 +89,6 @@ fetchPokemons().then((pokemons) => {
   let randomizePokemons = shuffleArray(doubledPokemons);
   let randomize2DPokemons = convertTo2DArray(randomizePokemons);
   initializeContainer(randomize2DPokemons);
-  muteMusic();
 });
 
 // change 1D array to 2D
@@ -225,7 +224,6 @@ function checkWinLose() {
     displayResults(message);
   }
   if (wrong === 5) {
-    let delay = 1000;
     const cardsEl = document.querySelectorAll(".inner-card.not-found");
     loser = true;
     message = "You Loss!";
