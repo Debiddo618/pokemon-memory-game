@@ -14,6 +14,7 @@ body {
     font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100vh;
+    background-color: #fff173;
 }
 
 .modal-container,
@@ -123,7 +124,7 @@ li {
 }
 
 .card-container {
-    width: 30%;
+    width: 40%;
     aspect-ratio: 1/1;
     display: flex;
     flex-wrap: wrap;

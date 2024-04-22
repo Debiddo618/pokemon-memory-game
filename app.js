@@ -206,7 +206,7 @@ function checkCards(event) {
         secondSelect.parentNode.classList.remove("not-found");
         secondSelect.nextElementSibling.classList.add("removed");
 
-        message = "Nice!";
+        message = `Nice! You caught ${firstSelect.id}!`;
         correct++;
       } else {
         if (firstSelect.id !== secondSelect.id) {
