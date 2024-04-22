@@ -42,14 +42,14 @@ let gameStart = false;
 function randomNumbers() {
   let numbers = [];
   while (numbers.length < 8) {
-    let number = Math.floor(Math.random() * 150) + 1;
+    let number = Math.floor(Math.random() * 135) + 252;
     if (!numbers.includes(number)) {
       numbers.push(number);
     }
   }
   return numbers;
 }
-
+//252, 386
 // get and return an array of 8 random pokemons
 async function fetchPokemons() {
   let url = "https://pokeapi.co/api/v2/pokemon/";
