@@ -267,7 +267,7 @@ function updateMessage() {
 function restartGame() {
   cardContainer.innerHTML = "";
   firstSelect = secondSelect = null;
-  correct = wrong = 0;
+  correct = wrong = timeTook = 0;
   winner = loser = false;
   message = "Pick two cards";
   timePaused = false;
