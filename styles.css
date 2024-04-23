@@ -210,7 +210,7 @@ li {
     opacity: 0.2;
 }
 
-@media(device-width <= 400px){
+@media only screen and (max-width:767px){
     .modal,.results-modal{
         width: 100%;
         height: 100vh;
