@@ -10,7 +10,7 @@
 
 This is a single-player memory game created using vanilla JavaScript, HTML, and CSS. The player will click on individual cards on the screen and try to match all cards to clear the board. All images are fetched using the Pokemon API. The goals of this project are to practice DOM manipulation techniques, CSS animations, and making API calls.
 
-## 🎮: Getting Started:
+## 🎮 Getting Started:
 
 You can access the game by clicking the link [here](https://debiddo618.github.io/pokemon-memory-game/).
 
