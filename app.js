@@ -252,7 +252,7 @@ function displayResults(message) {
   resultWrong.innerText = wrong;
   resultTime.innerText = secondsToMinutesAndSeconds(timeTook);
   resultAccuracy.innerText =
-    (correct / (correct + wrong)).toFixed(2) * 100 + "%";
+    ((correct / (correct + wrong)) * 100).toFixed(2) + "%";
   resultContainer.style.display = "flex";
   resultModal.style.display = "flex";
   openResultBtn.style.display = "inline-flex";
