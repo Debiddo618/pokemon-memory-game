@@ -84,7 +84,6 @@ fetchPokemons().then((pokemons) => {
   let doubledPokemons = [];
   pokemons.forEach((pokemon) => {
     doubledPokemons.push(pokemon);
-    doubledPokemons.push(pokemon);
   });
   let randomizePokemons = shuffleArray(doubledPokemons);
   let randomize2DPokemons = convertTo2DArray(randomizePokemons);
