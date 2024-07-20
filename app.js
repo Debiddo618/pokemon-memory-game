@@ -80,16 +80,16 @@ async function fetchPokemons() {
 }
 
 // double the pokemon array, randomize it and initialize the game board
-fetchPokemons().then((pokemons) => {
-  let doubledPokemons = [];
-  pokemons.forEach((pokemon) => {
-    doubledPokemons.push(pokemon);
-    doubledPokemons.push(pokemon);
-  });
-  let randomizePokemons = shuffleArray(doubledPokemons);
-  let randomize2DPokemons = convertTo2DArray(randomizePokemons);
-  initializeContainer(randomize2DPokemons);
-});
+// fetchPokemons().then((pokemons) => {
+//   let doubledPokemons = [];
+//   pokemons.forEach((pokemon) => {
+//     doubledPokemons.push(pokemon);
+//     doubledPokemons.push(pokemon);
+//   });
+//   let randomizePokemons = shuffleArray(doubledPokemons);
+//   let randomize2DPokemons = convertTo2DArray(randomizePokemons);
+//   initializeContainer(randomize2DPokemons);
+// });
 
 // change 1D array to 2D
 function convertTo2DArray(array) {
